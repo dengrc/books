@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title></title>
+    <meta content="webkit" name="renderer" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta http-equiv="pragma" content="no-cache" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+    <link href="./css/index.css" rel="stylesheet" />
+    <link href="../swiper/swiper.min.css" rel="stylesheet" />
+</head>
+
+<body>
+    <form id="form">
+        <input type="number" min="1" value="1" max="433" maxlength="3" name="page">
+        <label>/443</label>
+        <button type="submit" style="visibility: hidden">跳转</button>
+    </form>
+    <!-- Swiper -->
+    <div class="swiper-container">
+        <div class="swiper-wrapper" id="wrapper">
+
+        </div>
+    </div>
+</body>
+<script src="../swiper/swiper.min.js"></script>
+<script src="../js/getStorage.js"></script>
+<script>
+    const form = document.getElementById('form');
+    const storage = getStorage(localStorage, "home");
+    const swiper = new Swiper('.swiper-container', {
+        effect: 'cube',
+        initialSlide: storage.initialSlide || 0,
+        direction: 'vertical',
+        on: {
+            slideChange: function () {
+                storage.initialSlide = this.activeIndex
+                form['page'].value = this.activeIndex + 1
+            }
+        },
+        virtual: {
+            slides: new Array(432).join(',').split(',').map((item, i) => { return i + 1 }),
+            renderSlide: function (slide, index) {
+                return `<div class="swiper-slide" data-image="./media/image${slide}.jpeg" style="background-image:url(./media/image${slide}.jpeg)"></div>`
+            }
+        }
+    });
+</script>
+<script>
+    form.onsubmit = function (e) {
+        e.preventDefault();
+        swiper.slideTo(Math.min(Math.max(form['page'].value.trim() || 0, 1), 443) - 1)
+    }
+</script>
+
+</html>

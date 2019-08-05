@@ -1,0 +1,38 @@
+@import '../styl/reset';
+
+html, body {
+    height: 100%;
+    background-color: rgb(216, 185, 138);
+}
+
+.swiper {
+    &-container, &-wrapper {
+        height: 100%;
+    }
+
+    &-slide {
+        background-position: center center;
+        background-size: contain;
+        background-repeat: no-repeat;
+    }
+}
+
+form {
+    position: fixed;
+    z-index: 2;
+    bottom: 0.5em;
+    right: 0.5em;
+
+    input {
+        border: none;
+
+        &:focus {
+            outline: 1px solid #666;
+        }
+    }
+
+    button {
+        width: 1px;
+        height: 1px;
+    }
+}
