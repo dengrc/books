@@ -296,10 +296,20 @@ body {
 .swiper-wrapper {
   height: 100%;
 }
-.swiper-slide {
+.swiper-slide-image {
+  width: 100%;
+  height: 100%;
   background-position: center center;
   background-size: contain;
   background-repeat: no-repeat;
+}
+.swiper-slide-image-landscape {
+  width: 100vmax;
+  height: 100vmin;
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate3d(-50%, -50%, 0) rotate(90deg);
 }
 form {
   position: fixed;
